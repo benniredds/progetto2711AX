@@ -1,10 +1,14 @@
 NAMESPACE ExampleClassLib.Entry
-    FUNCTION_BLOCK EquipmentModule1 // Wrapper FB
+    ///Questo è il commento della FB
+    FUNCTION_BLOCK EquipmentModule1 //Wrapper FB; questo commento non è visibile
        VAR_INPUT
+          ///questa è la variabile di Start
           start : BOOL;
+          ///questa è la variabile di Stop
           stop : BOOL;
        END_VAR
        VAR // OK, classes can be instantiated in VAR
+        {S7.extern=ReadOnly}
           belt1, belt2, belt3 : Belt;
           feed                : OneBeltConveyor;
           transport           : TwoBeltConveyor;
@@ -29,3 +33,22 @@ NAMESPACE ExampleClassLib.Entry
        END_IF;
     END_FUNCTION_BLOCK
  END_NAMESPACE
+
+
+
+ NAMESPACE MotorLibrary
+
+   FUNCTION_BLOCK MotorWrapper
+       VAR_INPUT
+           start : BOOL;
+       END_VAR
+       VAR
+           m : Motor;
+       END_VAR
+       
+       IF start THEN
+           m.Start();
+       END_IF;
+   END_FUNCTION_BLOCK
+
+END_NAMESPACE
